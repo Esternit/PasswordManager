@@ -6,7 +6,7 @@ export default function Home() {
   const [message, setMessage] = useState("Загрузка...");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/") // Запрос к FastAPI
+    fetch("http://localhost:5000/") // Запрос к FastAPI
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((error) => setMessage("Ошибка соединения с сервером"));

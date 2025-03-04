@@ -5,6 +5,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "http://localhost:4000",
 ]
 
 app.add_middleware(
@@ -18,6 +19,10 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"message": "Привет из FastAPI!"}
+
+@app.head("/")
+async def head_root():
+    return {}
 
 if __name__ == "__main__":
     import uvicorn

@@ -12,12 +12,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "backend:build": "cd backend && pyinstaller --onefile server.py",
+    "backend:build": "cd backend && venv\\Scripts\\activate && pyinstaller --onefile server.py",
     "frontend:build": "next build",
     "electron:build": "electron-builder",
     "build:all": "npm run backend:build && npm run frontend:build && npm run electron:build"
   },
   "build": {
+    "asarUnpack": [
+      "out/**",
+      "backend/dist/server.exe"
+    ],
+    "files": [
+      "main.js",
+      "out/**",
+      "backend/dist/**"
+    ],
     "win": {}
   },
   "dependencies": {
@@ -25,10 +34,11 @@
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "tree-kill": "^1.2.2",
     "wait-on": "^8.0.2"
   },
   "devDependencies": {
-    "electron-builder": "^25.1.8",
-    "electron": "^35.0.0"
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
   }
 }
