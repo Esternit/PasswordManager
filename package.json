@@ -6,16 +6,16 @@
   "description": "Password manager built with Electron, FastAPI, and React",
   "author": "naming",
   "scripts": {
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run backend\" \"npm run frontend\" \"wait-on http://localhost:3000 && electron .\"",
     "backend": "cd backend && venv\\Scripts\\activate && python server.py",
     "frontend": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint",
     "backend:build": "cd backend && venv\\Scripts\\activate && pyinstaller --onefile server.py",
     "frontend:build": "next build",
     "electron:build": "electron-builder",
-    "build:all": "npm run backend:build && npm run frontend:build && npm run electron:build"
+    "build:all": "cross-env NODE_ENV=production npm run backend:build && npm run frontend:build && npm run electron:build"
   },
   "build": {
     "asarUnpack": [
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -38,6 +39,7 @@
     "wait-on": "^8.0.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^35.0.0",
     "electron-builder": "^25.1.8"
   }
