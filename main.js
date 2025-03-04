@@ -15,17 +15,23 @@ app.whenReady().then(() => {
     },
   });
 
-  // Запускаем FastAPI
-  const backendPath = path.join(
-    __dirname,
-    "backend",
-    "venv",
-    "Scripts",
-    "python.exe"
-  );
-  backendProcess = spawn(backendPath, ["server.py"], {
-    cwd: path.join(__dirname, "backend"),
-  });
+  // Путь к собранному backend.exe
+  let backendPath = path.join(__dirname, "backend", "dist", "server.exe");
+  console.log(`Запуск backend: ${backendPath}`);
+
+  backendProcess = spawn(backendPath, { shell: true });
+
+  //   // Запускаем FastAPI
+  //   const backendPath = path.join(
+  //     __dirname,
+  //     "backend",
+  //     "venv",
+  //     "Scripts",
+  //     "python.exe"
+  //   );
+  //   backendProcess = spawn(backendPath, ["server.py"], {
+  //     cwd: path.join(__dirname, "backend"),
+  //   });
 
   backendProcess.stdout.on("data", (data) => console.log(`Backend: ${data}`));
   backendProcess.stderr.on("data", (data) =>

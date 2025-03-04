@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 backend/venv/
+backend/build/
+backend/dist/
+
+dist/

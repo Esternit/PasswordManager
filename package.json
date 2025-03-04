@@ -3,20 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "main": "main.js",
+  "description": "Password manager built with Electron, FastAPI, and React",
+  "author": "naming",
   "scripts": {
     "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"wait-on http://localhost:3000 && electron .\"",
     "backend": "cd backend && venv\\Scripts\\activate && python server.py",
     "frontend": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "backend:build": "cd backend && pyinstaller --onefile server.py",
+    "frontend:build": "next build",
+    "electron:build": "electron-builder",
+    "build:all": "npm run backend:build && npm run frontend:build && npm run electron:build"
+  },
+  "build": {
+    "win": {}
   },
   "dependencies": {
     "concurrently": "^9.1.2",
-    "electron": "^35.0.0",
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "wait-on": "^8.0.2"
+  },
+  "devDependencies": {
+    "electron-builder": "^25.1.8",
+    "electron": "^35.0.0"
   }
 }
