@@ -46,3 +46,6 @@ backend/dist/
 
 dist/
 frontend/
+
+*.db
+*.key
