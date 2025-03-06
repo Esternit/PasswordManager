@@ -103,7 +103,7 @@ def update_password(site: str, request: PasswordRequest, db: Session = Depends(g
 @app.get("/get_passwords/")
 def get_passwords(db: Session = Depends(get_db)):
     passwords = db.query(PasswordEntry).all()
-    return [{"site": password.site, "login": password.login, "id": password.id} for password in passwords]
+    return [{"site": password.site, "login": password.login, "id": password.id, "password": "******"} for password in passwords]
 
 @app.get("/get_password/")
 def get_password(site: str, db: Session = Depends(get_db)):
