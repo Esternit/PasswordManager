@@ -78,6 +78,12 @@ Make sure you have the following installed on your system:
 
 ### Building the Application
 
+0. Uncomment this line in next.config.mjs:
+
+```javascript
+// assetPrefix: "/",
+```
+
 1. Build everything for production:
 
    ```bash
@@ -169,11 +175,3 @@ mainWindow = new BrowserWindow({
   },
 });
 ```
-
-## Contributing
-
-1. Fork the repository.
-2. Create a new branch for your feature (`git checkout -b feature-name`).
-3. Make changes and commit them (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Open a pull request.
