@@ -4,7 +4,7 @@
   "private": true,
   "main": "main.js",
   "description": "Password manager built with Electron, FastAPI, and React",
-  "author": "naming",
+  "author": "your_name",
   "scripts": {
     "dev": "cross-env NODE_ENV=development concurrently \"npm run frontend\" \"wait-on http://localhost:3000 && electron .\"",
     "backend": "cd backend && venv\\Scripts\\activate && python server.py",

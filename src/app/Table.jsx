@@ -42,10 +42,10 @@ const CustomTable = () => {
       .get(`http://localhost:5000/get_password?site=${site}`)
       .then((res) => {
         navigator.clipboard.writeText(res.data.password);
-        setAlertOpacity(1); // Плавное появление
+        setAlertOpacity(1);
 
         setTimeout(() => {
-          setAlertOpacity(0); // Плавное исчезновение
+          setAlertOpacity(0);
         }, 3000);
       });
   };
@@ -82,7 +82,6 @@ const CustomTable = () => {
           position: "relative",
         }}
       >
-        {/* Alert с анимацией */}
         <Alert
           severity="success"
           sx={{
@@ -92,10 +91,10 @@ const CustomTable = () => {
             transition: "opacity 0.5s ease-in-out",
             display: alertOpacity == 1 ? "flex" : "none",
             width: "60%",
-            zIndex: 10, // Поверх таблицы
+            zIndex: 10,
           }}
         >
-          Пароль скопирован в буфер обмена!
+          Password copied!
         </Alert>
 
         <Button
@@ -103,7 +102,7 @@ const CustomTable = () => {
           onClick={handleButtonClick}
           sx={{ zIndex: 1, marginTop: "20px" }}
         >
-          Добавить пароль
+          Add password
         </Button>
 
         <Box
@@ -219,7 +218,7 @@ const CustomTable = () => {
               color="primary"
               onClick={handleAddPassword}
             >
-              Добавить
+              Add
             </Button>
           </Box>
         </Modal>

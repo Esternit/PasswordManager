@@ -48,12 +48,12 @@ app.whenReady().then(async () => {
     console.error(`Backend Error: ${data}`)
   );
 
-  console.log("Ожидание старта FastAPI...");
+  console.log("Waiting for FastAPI...");
   try {
     await waitOn({ resources: ["http://127.0.0.1:5000"], timeout: 20000 });
-    console.log("FastAPI запущен.");
+    console.log("FastAPI started.");
   } catch (err) {
-    console.error("Ошибка: FastAPI не запустился", err);
+    console.error("FastAPI failed to start:", err);
   }
 
   if (process.env.NODE_ENV === "development") {
@@ -64,7 +64,7 @@ app.whenReady().then(async () => {
       "app.asar.unpacked",
       "out"
     );
-    console.log(`Запускаем статический сервер в: ${frontendPath}`);
+    console.log(`Opening frontend: ${frontendPath}`);
 
     frontendServer = spawn("npx", ["serve", "-s", frontendPath, "-l", "4000"], {
       shell: true,
@@ -77,12 +77,12 @@ app.whenReady().then(async () => {
       console.error(`Frontend Error: ${data}`)
     );
 
-    console.log("Ожидание старта статического сервера...");
+    console.log("Waiting for static server...");
     try {
       await waitOn({ resources: ["http://127.0.0.1:4000"], timeout: 20000 });
-      console.log("Статический сервер запущен.");
+      console.log("Static server started.");
     } catch (err) {
-      console.error("Ошибка: Статический сервер не запустился", err);
+      console.error("Static server failed to start:", err);
     }
 
     mainWindow.loadURL("http://localhost:4000");
