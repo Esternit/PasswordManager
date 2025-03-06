@@ -15,14 +15,14 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-def generate_password(length=12):
+def generate_password(length=16):
     characters = string.ascii_letters + string.digits + string.punctuation
     return ''.join(secrets.choice(characters) for _ in range(length))
 
 class PasswordEntry(Base):
     __tablename__ = "passwords"
     id = Column(String, primary_key=True, index=True, default=lambda: str(uuid.uuid4()))
-    site = Column(String, unique=True, index=True)
+    site = Column(String)
     login = Column(String)
     password = Column(String)
 
@@ -81,8 +81,8 @@ def add_password(request: PasswordRequest, db: Session = Depends(get_db)):
     return {"message": "Запись сохранена!", "id": db_entry.id}
 
 @app.delete("/delete_password/")
-def delete_password(site: str, db: Session = Depends(get_db)):
-    db_entry = db.query(PasswordEntry).filter(PasswordEntry.site == site).first()
+def delete_password(id: str, db: Session = Depends(get_db)):
+    db_entry = db.query(PasswordEntry).filter(PasswordEntry.id == id).first()
     if not db_entry:
         raise HTTPException(status_code=404, detail="Запись не найдена")
     db.delete(db_entry)

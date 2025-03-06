@@ -6,6 +6,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Button, Modal, TextField } from "@mui/material";
 
 const CustomTable = () => {
@@ -23,6 +25,7 @@ const CustomTable = () => {
     { field: "site", headerName: "Site" },
     { field: "login", headerName: "Login" },
     { field: "password", headerName: "Password" },
+    { field: "delete", headerName: "Delete" },
   ];
 
   useEffect(() => {
@@ -59,6 +62,12 @@ const CustomTable = () => {
 
   const handleButtonClick = async () => {
     setOpen(true);
+  };
+
+  const handleDeletePassword = async (id) => {
+    await axios.delete(`http://localhost:5000/delete_password?id=${id}`);
+    const res = await axios.get("http://localhost:5000/get_passwords");
+    setData(res.data);
   };
 
   return (
@@ -146,6 +155,17 @@ const CustomTable = () => {
                     }}
                   >
                     {row.password}
+                  </TableCell>
+                  <TableCell
+                    sx={{ textAlign: "center", justifyContent: "center" }}
+                  >
+                    <IconButton
+                      aria-label="delete"
+                      size="small"
+                      onClick={() => handleDeletePassword(row.id)}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
